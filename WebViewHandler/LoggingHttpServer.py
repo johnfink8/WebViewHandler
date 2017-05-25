@@ -40,7 +40,7 @@ class LoggingHttpRequestHandler(BaseHTTPRequestHandler):
             time.sleep(0.5)
             return self.route_getlogs()
         tempbuffer = buf[:]
-        log_text = ''
+        log_text = '\n'
         if 'lastline' in self.query and self.query['lastline'][0]:
             for i in xrange(-1, -len(buf) - 1, -1):
                 line_text = self.server.format(buf[i])
@@ -50,7 +50,6 @@ class LoggingHttpRequestHandler(BaseHTTPRequestHandler):
                         time.sleep(0.5)
                         return self.route_getlogs()
                     tempbuffer = buf[i + 1:]
-                    log_text = '\n'
                     break
         tempbuffer = map(lambda x: self.server.format(x), tempbuffer)
         log_text += '\n'.join(tempbuffer)
