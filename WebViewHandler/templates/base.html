@@ -38,7 +38,7 @@
         }).done(function (data) {
             var atBottom = false;
             var elem = $('#logcontents');
-            if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+            if (elem[0].scrollHeight - elem.scrollTop() <= elem.outerHeight()+20) {
                 atBottom = true;
             }
             elem.append(data['logs']);

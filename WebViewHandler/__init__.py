@@ -2,6 +2,7 @@ import logging.handlers
 from .LoggingHttpServer import LoggingHttpRequestHandler
 import SocketServer
 import threading
+import logging
 
 
 class WebViewHandler(logging.handlers.BufferingHandler):
@@ -18,6 +19,12 @@ class WebViewHandler(logging.handlers.BufferingHandler):
                 self.buffer.pop(0)
         finally:
             self.release()
+
+    def format(self, record):
+        if self.formatter:
+            return super(WebViewHandler, self).format(record)
+        else:
+            return logging.Formatter('%(asctime)s %(message)s').format(record)
 
     def run(self):
         httpd = SocketServer.TCPServer(("", self.port), LoggingHttpRequestHandler)
