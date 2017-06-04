@@ -11,3 +11,6 @@ Python logging handler that outputs real-time to a simple web-based viewing port
     logger.info('Yay it works!')
 
 Navigate to http://<my_ip>:8080 to see your logs.
+
+## Installation
+    pip install webviewhandler
