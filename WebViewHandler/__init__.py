@@ -38,6 +38,7 @@ class WebViewHandler(logging.handlers.BufferingHandler):
 
     def run(self):
         httpd = SocketServer.ThreadingTCPServer((self.host, self.port), LoggingHttpRequestHandler)
+        httpd.daemon_threads = True
         httpd.buffer = self.buffer
         httpd.format = self.format
         t = threading.Thread(target=httpd.serve_forever)
