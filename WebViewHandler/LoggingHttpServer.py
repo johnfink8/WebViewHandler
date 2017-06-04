@@ -1,5 +1,4 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 import os
 import json
 from hashlib import md5
@@ -9,18 +8,14 @@ import time
 
 class LoggingHttpRequestHandler(BaseHTTPRequestHandler):
     def __init__(self, request, client_address, server):
-        self.template_set = Environment(
-            loader=FileSystemLoader(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates')),
-            autoescape=select_autoescape(['html', 'xml'])
-        )
+        self.template = open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates', 'base.html')).read()
         self.path = None
         self.params = None
         self.query = None
         BaseHTTPRequestHandler.__init__(self, request, client_address, server)
 
     def render(self, template_name, **kwargs):
-        template = self.template_set.get_template(template_name)
-        self.wfile.write(template.render(**kwargs))
+        self.wfile.write(self.template)
 
     def send_json(self, data):
         self.send_response(200)

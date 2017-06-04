@@ -3,11 +3,12 @@
 from distutils.core import setup
 
 setup(name='WebViewHandler',
-      version='1.0',
+      version='0.1',
       description='Logging handler that provides scrolling web view',
       author='John Fink',
       author_email='johnfink8@gmail.com',
       packages=['WebViewHandler', ],
-      requires=['Jinja2', ],
-      package_data={'WebViewHandler': ['templates/base.html']}
+      package_data={'WebViewHandler': ['templates/base.html']},
+      url='https://github.com/johnfink8/WebViewHandler',
+      download_url = 'https://github.com/johnfink8/WebViewHandler/archive/0.1.tar.gz'
       )
